@@ -4,7 +4,7 @@ const helper = document.querySelector('.help');
 const helpText = document.querySelector('.helpText');
 const amount = document.querySelector('.amount');
 
-let number = Math.round(Math.random() * 100);
+let number = Math.floor(Math.random() * 100);
 let count = 0;
 
 const disable = () => {
@@ -34,8 +34,8 @@ const reset = () => {
     startNewGame.innerHTML = 'Начать новую игру';
     helper.append(startNewGame);
     startNewGame.onclick = startNew;
-    count = 0;
     disable()
+    count = 0;
 }
 
 const game = (num) => {
@@ -45,14 +45,15 @@ const game = (num) => {
         helpText.style.color = 'green';
         reset();
     } else if (input.value < num.toString()) {
+        count ++;
         helpText.innerHTML = 'Слишком мало';
         helpText.style.color = 'red';
     } else if(input.value > num.toString()) {
+        count ++;
         helpText.innerHTML = 'Слишком много';
         helpText.style.color = 'red';
     }
 
-    count ++;
     count === 1
         ? amount.innerHTML += 'Прошлые попытки: ' + input.value
         : amount.innerHTML += ' ' + input.value
